@@ -38,9 +38,15 @@ public class MainActivity extends AppCompatActivity {
         dNotificationsButton = findViewById(R.id.dNotificationsBtn);
 
         mediaPlayer = new MediaPlayer();
+        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mediaPlayer.start();
+            }
+        });
         try {
             mediaPlayer.setDataSource("https://muz-tv.ru/storage/files/chart-tracks/1596451083.mp3");
-            mediaPlayer.prepare();
+            mediaPlayer.prepareAsync(); // использование асинхронной подготовки
         } catch (IOException e) {
             e.printStackTrace();
         }
